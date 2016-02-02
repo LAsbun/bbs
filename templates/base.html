@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bbs</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css" />
+    {% block css %} {% endblock %}
+</head>
+<body>
+<div class="pg-header">
+    <div class="head-menu">
+        <a href="/" class="digg-logo"></a>
+        <div class="action-menu">
+            <a href="/index/" class="tb active">全部</a>
+            <a href="/index/" class="tb">老男孩</a>
+            <a href="/index/" class="tb">1024</a>
+            <a href="/index/" class="tb">IT</a>
+        </div>
+        <div class="action-nav">
+            <a href="/index/" class="login-btn-a">登陆</a>
+            <a href="/index/" class="login-btn-a">注册</a>
+        </div>
+    </div>
+
+</div>
+
+<div class="pg-body">
+    <div class="main-content">
+        <div class="content-L">
+            <div class="nav-top-area">
+                <div class="child-nav">
+                    <a href="/all/hot/recent/1" hidefocus="false" class="hotbtn active icons" id="hotts-nav-btn">最热</a>
+                    <a href="/all/new/1" hidefocus="false" class="newbtn" id="newest-nav-btn">最新</a>
+                    <a href="/all/man/1" hidefocus="false" class="personbtn" id="person-nav-btn">人类发布</a>
+
+                </div>
+            </div>
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+</div>
+
+<div class="pg-footer">
+    <div class="foot-nav2">
+        <h3>版权所有，围着必究</h3>
+    </div>
+</div>
+
+<script type="text/javascript" src="/static/js/jquery-1.12.0.js"></script>
+<script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+{% block js %} {% endblock %}
+</body>
+</html>

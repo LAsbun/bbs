@@ -1,0 +1,247 @@
+body {
+    margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.pg-header {
+    height: 44px;
+    background-color: #2459a2;
+}
+
+.head-menu {
+    width: 1016px;
+    margin: 0 auto;
+    line-height: 44px;
+    height: 44px;
+    background-color: #2459a2;
+}
+
+.action-menu {
+    float: left;
+    line-height: 43px\9;
+    margin-left: 20px;
+    font-size: 12px;
+}
+
+.action-menu a.tb {
+    color: #c0cddf;
+    margin-left: -3px;
+    padding: 0 13px 0 16px;
+    display: inline-block;
+    vertical-align: 1px\9;
+    text-decoration: none;
+}
+
+.action-menu a.tb:hover{
+    color: #fff;
+    background-color: #204982;
+}
+
+.action-menu a.active{
+    color: #fff;
+    background-color: #204982;
+}
+
+.digg-logo {
+    width: 121px;
+    height: 23px;
+    background: url("/static/images/logo.png") no-repeat 0 0;
+    float: left;
+    margin-top: 11px;
+}
+
+.action-nav {
+    float: right;
+    position: relative;
+    margin-right: 15px;
+    font-size: 12px;
+    line-height: 43px\9;
+}
+.action-nav a {
+    color: #c7d1dc;
+    padding: 0 15px;
+    display: inline-block;
+    vertical-align: 1px\9;
+    text-decoration: none;
+}
+
+.action-nav a:hover{
+    color: #fff;
+    background-color: #204982;
+}
+
+.pg-body {
+    clear: both;
+    _zoom: 1;
+    background-color: #ededed;
+    _height: 100%;
+}
+
+.main-content {
+    width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+    height: auto!important;
+    min-height: 713px;
+    padding: 6px 28px 60px;
+    background-color: #fff;
+}
+
+.content-L {
+    width: 630px;
+    overflow: hidden;
+    margin-top: 3px;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+.nav-top-area {
+    overflow: hidden;
+    clear: both;
+    border-bottom: 1px solid #CCDCEF;
+    _zoom: 1;
+}
+
+.child-nav {
+    float: left;
+}
+
+.child-nav a {
+    display: inline-block;
+    width: 60px;
+    height: 26px;
+    line-height: 26px;
+    margin-top: 3px;
+    margin-bottom: 13px;
+    color: #369;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+.icons {
+    background: url("/static/images/tip.png?v=2.9") no-repeat 0 0;
+}
+.child-nav .active {
+    background-position: 0 -299px;
+    color: #333;
+    text-decoration: none;
+}
+.content-list {
+    position: relative;
+
+}
+
+.content-list .item {
+    clear: both;
+    padding-top: 10px;
+    border-bottom: 1px solid #dce7f4;
+    overflow: hidden;
+    position: relative;
+    _zoom: 1;
+}
+
+.content-list .item .news-content {
+    padding-top: 1px;
+    padding-top: 2px\9;
+    _padding-top: 1px;
+}
+
+.content-list .item .news-content .part1 {
+    line-height: 20px;
+
+}
+
+.content-list .item .news-content .part1 .show-content {
+    font-size: 14px;
+    color: #369;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.content-list .item .content-source {
+    color: #b4b4b4;
+    margin-left: 7px;
+}
+
+.content-list .item .news-content .area-summary {
+    font-size: 12px;
+    color: #787878;
+    margin-top: 3px;
+    margin-top: 2px\9;
+    _margin-top: 3px;
+    font-family: Arial,Helvetica,sans-serif;
+}
+
+.content-list .item .news-content .area-summary .summary {
+    line-height: 20px;
+    _line-height: 18px;
+}
+.content-list .item .news-content .part2 {
+    padding-top: 6px;
+    padding-top: 5px\9;
+    _padding-top: 5px;
+    color: #ccc;
+    margin-bottom: 12px;
+    margin-bottom: 13px\9;
+    _zoom: 1;
+
+}
+
+.content-list .item .news-content .part2 .digg-a{
+  min-width: 54px;
+    text-decoration: none;
+}
+
+.hand-icon {
+  background: url("/static/images/icon_18_118.png?v=2.13") no-repeat scroll 0 0 transparent;
+}
+
+.part2 .icon-digg {
+  background-position: 0 -40px;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+}
+
+.content-list .item .news-content .part2 span, .content-list .item .news-content .part2 a {
+  display: inline-block;
+}
+
+.content-list .item .news-content .part2 .discus-a {
+  min-width: 54px;
+}
+
+.content-list .item .news-content .part2 .icon-discus {
+  background-position: 0px -100px;
+  width: 18px;
+  height: 18px;
+  vertical-align: -1px;
+}
+
+.pg-footer {
+  margin: 0 auto;
+  width: 960px;
+  font-size: 12px;
+  background-color: #fff;
+  padding: 0 28px;
+  overflow: hidden;
+}
+
+.pg-footer .foot-nav2 {
+  margin-top: 6px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.user-opr-box {
+  width: 102px;
+  border: 1px solid #d5d5d5;
+  display: none;
+  position: absolute;
+  top: 44px;
+  z-index: 2;
+  background-color: #fff;
+}

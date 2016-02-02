@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for new in news_list %}
+
+        <div class="content-list" >
+            <div class="item">
+                <div class="news-content">
+                    <div class="part1">
+                        <a href="{{ new.url }}" class="show-content">{{ new.title }}</a>
+                        <span class="content-source">{{ new.newstype }}</span>
+                    </div>
+                    <div class="area-summary">
+                        <span class="summary">{{ new.summary }}</span>
+                    </div>
+                    <div class="part2">
+
+                        <a class="digg-a" href="#">
+                            <span class="hand-icon icon-digg" onclick="addFavor(this, {{ new.id }})"></span>
+
+                            <b onclick="addFavor2(this, {{ new.id }})">{{ new.favor_count }}</b>
+                        </a>
+                        <a href="#" class="discus-a">
+                            <span class="hand-icon icon-discus"></span>
+                            <b>{{ new.reply_count }}</b>
+                        </a>
+                        
+                        <label >{{ new.create_date|date:'Y-m-d H:i:s' }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block js %}
+    <script>
+        function addFavor2(doc, id){
+            $.ajax({
+                url:'/addfavor/',
+                data:{nid:id},
+                type:'POST',
+                success:function(obj){
+                    var temp = jQuery.parseJSON(obj);
+                    //console.log(temp);
+                    if(temp.staus == 0){
+
+                        alert(temp.message);
+                    }
+                    else {
+                        //console.log(temp.data);
+                        $(doc).text(temp.data);
+                    }
+                }
+            })
+        }
+        function addFavor(doc, id){
+            //console.log($(doc.nextElementSibling).text('10'));
+            $.ajax({
+                url:'/addfavor/',
+                data:{nid:id},
+                type:'POST',
+                success:function(obj){
+                    var temp = jQuery.parseJSON(obj);
+                    //console.log(temp);
+                    if(temp.staus == 0){
+
+                        alert(temp.message);
+                    }
+                    else {
+                        //console.log(temp.data);
+                        $(doc.nextElementSibling).text(temp.data);
+                    }
+                }
+            })
+        }
+    </script>
+{% endblock %}
