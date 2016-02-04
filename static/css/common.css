@@ -245,3 +245,19 @@ a {
   z-index: 2;
   background-color: #fff;
 }
+
+.part3 {
+  border: 1px solid #cbdcee;
+  background-color: #f6f6f6;
+  padding: 12px 15px 0;
+  margin-bottom: 12px;
+  width: 598px;
+  _zoom: 1;
+}
+.hide{
+    display: none;
+}
+
+.pp {
+  _width: 90%;
+}

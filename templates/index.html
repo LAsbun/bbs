@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
+
+
+
 {% block content %}
+
+
     {% for new in news_list %}
 
         <div class="content-list" >
@@ -21,11 +26,21 @@
                             <b onclick="addFavor2(this, {{ new.id }})">{{ new.favor_count }}</b>
                         </a>
                         <a href="#" class="discus-a">
-                            <span class="hand-icon icon-discus"></span>
+                            <span class="hand-icon icon-discus" onclick="replay(this, {{ new.id }})"></span>
                             <b>{{ new.reply_count }}</b>
                         </a>
-                        
+
                         <label >{{ new.create_date|date:'Y-m-d H:i:s' }}</label>
+                    </div>
+                    <div class="part3 hide">
+                        <div class="reply1 pp">
+                            <label class="pp">所有评论：</label><hr/>
+                        </div>
+                        <div class="reply2 pp">
+                            <label>请输入评论：<input type="text"/></label>
+
+                            <input type="submit" value="提交" onclick="submitreply(this, {{ new.id }})"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -33,8 +48,64 @@
     {% endfor %}
 {% endblock %}
 
+
+
 {% block js %}
     <script>
+        /*
+        添加评论
+        */
+        function submitreply(doc, id){
+
+            var ss = $(doc).prev('label').children('input').val();
+            if(ss.length>1) {
+                $.ajax({
+                    url: '/submitreply/',
+                    data: {data: $(doc).prev('label').children('input').val(), nid: id},
+                    type: 'POST',
+                    success: function (ret) {
+                        temp = jQuery.parseJSON(ret);
+                        if(temp.status == 0){
+                            alert(temp.msg);
+                        }
+                        else{
+                            tep= "<div>"+ temp.data.user__username+":"+ temp.data.content+"------"+ temp.data.create_date+"</div>";
+                            $(doc).parent('div').prev('div').first().append(tep);
+                            $(doc).prev('label').children('input').val('');
+                        }
+                    }
+                });
+            }
+        }
+        /*
+            显示全部评论
+        */
+
+        function replay(doc, id){
+            /*
+             *toggleClass(classname) 点击一次展开点击一次收回
+             */
+            $(doc).parent('a').parent('div').next('div').toggleClass('hide');
+            $.ajax({
+                url: '/getreply/',
+                data: {nid: id},
+                type: 'POST',
+                success: function(res){
+                    temp = jQuery.parseJSON(res);
+                    //aconsole.log(temp);
+                    $.each(temp,function(k, v){
+                        tep= "<div>"+ v.user__username+":"+ v.content+"------"+ v.create_date+"</div>";
+
+                        $(doc).parent('a').parent('div').next('div').find('div').first().append(tep);
+                        $(doc).parent('a').parent('div').next('div').find('div').first().append("<hr/>");
+
+                    });
+                }
+            })
+        }
+        /*
+        点赞
+         */
         function addFavor2(doc, id){
             $.ajax({
                 url:'/addfavor/',
@@ -54,8 +125,11 @@
                 }
             })
         }
+        /*
+        点赞
+         */
         function addFavor(doc, id){
-            //console.log($(doc.nextElementSibling).text('10'));
+
             $.ajax({
                 url:'/addfavor/',
                 data:{nid:id},
