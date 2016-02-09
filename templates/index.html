@@ -3,7 +3,7 @@
 
 
 
-{% block content %}
+{% block L-content %}
 
 
     {% for new in news_list %}
@@ -48,13 +48,73 @@
     {% endfor %}
 {% endblock %}
 
+{% block R-content %}
+    <div class="chat-area" id="chat">
+        <h4 style="background-color: gray">web聊天室</h4>
+    </div>
+    <div >
+        {% csrf_token %}
+        <label >
+            <textarea type="text" name="input_content" id="web-content" class="chat-height2"></textarea>
+            <input type="submit" class="chat-height2" value="发送" onclick="addweb(this)"/>
+        </label>
+    </div>
+{% endblock %}
 
 
 {% block js %}
     <script>
         /*
-        添加评论
+        *定时刷新 没有完成， 不知道web聊天室的div是怎么写的！！！
         */
+        setInterval(going(), 2000);
+        window.last_num = 0;
+        function going(){
+            console.log(window.last_num);
+            if(window.last_num){
+                $.ajax({
+                   url:'/freshwebchat/',
+                    data:{last_num:window.last_num},
+                    type:'POST',
+                    success:function(ret){
+                        $.each(function (k, v) {
+                            tep= "<div>"+ v.user__username+":"+ v.content+"------"+ v.create_date+"</div>";
+                            $('chat').append(tep);
+                        })
+                    }
+                });
+            }
+            else{
+                alert('fuwuqiyichang');
+            }
+        }
+        /*
+         web聊天室
+         */
+       // window.
+        function addweb(doc){
+            var conten = $(doc).prev('textarea').val();
+            $.ajax({
+                url:'/webchat/',
+                data:{content:conten},
+                type:'POST',
+                success: function (ret) {
+                    temp = jQuery.parseJSON(ret);
+                    if(temp.status) {
+                        tep = "<div>" + temp.data.user__username + ":" + conten + "------" + temp.data.create_date + "</div>";
+                        $("#chat").append(tep);
+                    }
+                    else{
+                        alert(temp.msg);
+                    }
+                }
+            });
+            //tep= "<div>"+ temp.data.user__username+":"+ temp.data.content+"------"+ temp.data.create_date+"</div>";
+            console.log(conten);
+        }
+        /*
+         添加评论
+         */
         function submitreply(doc, id){
 
             var ss = $(doc).prev('label').children('input').val();
@@ -78,8 +138,8 @@
             }
         }
         /*
-            显示全部评论
-        */
+         显示全部评论
+         */
 
         function replay(doc, id){
             /*
@@ -104,7 +164,7 @@
             })
         }
         /*
-        点赞
+         点赞
          */
         function addFavor2(doc, id){
             $.ajax({
@@ -126,7 +186,7 @@
             })
         }
         /*
-        点赞
+         点赞
          */
         function addFavor(doc, id){
 

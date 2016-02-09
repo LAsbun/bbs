@@ -24,5 +24,7 @@ urlpatterns = [
     url(r'^getreply/', views.getreply, name='getreply'),
     url(r'^login/', views.login, name='login'),
     url(r'^logout/',views.logout, name='logout'),
-    url(r'^submitreply/', views.submitreply, name='submitreply')
+    url(r'^submitreply/', views.submitreply, name='submitreply'),
+    url(r'^webchat/', views.webchat, name='webchat'),
+    url(r'^freshwebchat/', views.freshwebchat, name='freshwebchat'),
 ]

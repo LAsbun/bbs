@@ -4,10 +4,11 @@ from django.shortcuts import render_to_response, HttpResponse, redirect
 from django.template.context import RequestContext
 from django.views.decorators.csrf import csrf_exempt #临时去除csrf
 from django.core.serializers.json import DjangoJSONEncoder #django自带序列化
-from app01.models import News, Reply, Admin
+from app01.models import News, Reply, Admin, Chat
 import json
 import datetime
 from datetime import date
+from app01.common import try_int
 
 
 # Create your views here.
@@ -109,7 +110,7 @@ def submitreply(request):
     ret = {'status':0, 'data':'', 'msg':''}
 
     try:
-        print 'sasa'
+        #print 'sasa'
         data = request.POST.get('data')
         nid = request.POST.get('nid')
         id = request.session.get('is_login')
@@ -128,5 +129,48 @@ def submitreply(request):
         return HttpResponse(json.dumps(ret))
     except Exception, e:
         ret['msg'] = '服务器异常'
-        print e.message
+        #print e.message
         return HttpResponse(json.dumps(ret))
+
+@csrf_exempt
+@check_login
+def webchat(request):
+
+    ret = {'status':0, 'data':'', 'msg':''}
+
+    try:
+        data = request.POST.get('content')
+        id = request.session.get('is_login')
+
+        obj = Chat.objects.create(
+            content=data,
+            user=Admin.objects.get(id=id)
+        )
+
+        ret['status'] = 1
+        ret['data'] = {'user__username':obj.user.username, 'create_date':obj.create_date.strftime('%Y-%m-%d %H:%M:%S')}
+        return HttpResponse(json.dumps(ret))
+
+    except Exception, e:
+        ret['msg'] = '服务器异常'
+        return HttpResponse(json.dumps(ret))
+
+@csrf_exempt
+@check_login
+def freshwebchat(request):
+    ret = {'last_num':'','data':''}
+    try:
+        last_num = try_int(request.POST.get('last_num'))
+
+        if last_num == 0:
+            data = list(Chat.objects.all()[-10:-1])
+        else:
+            data = list(Chat.objects.all()[last_num:])
+
+        ret['last_num'] = data[-1]['id']
+        ret['data'] = data
+        print ret
+        return HttpResponse(json.dumps(ret, CJsonEncode))
+
+    except Exception, e:
+        return HttpResponse()
