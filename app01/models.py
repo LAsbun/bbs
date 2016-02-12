@@ -21,6 +21,8 @@ class Admin(models.Model):
 
     usertype = models.ForeignKey('UserType')
 
+    friends = models.ManyToManyField('self', blank=True, related_name='my_friends')
+
     def __unicode__(self):
         return self.username
 # 新闻类型

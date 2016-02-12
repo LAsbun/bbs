@@ -14,11 +14,13 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from webqq import urls as web11_urls
 
 from app01 import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^chat/', include(web11_urls)),
     url(r'^index/', views.index, name='index'),
     url(r'^addfavor/', views.addfavor, name='addfavor'),
     url(r'^getreply/', views.getreply, name='getreply'),

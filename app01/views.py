@@ -8,7 +8,7 @@ from app01.models import News, Reply, Admin, Chat
 import json
 import datetime
 from datetime import date
-from app01.common import try_int
+from app01.common import try_int, check_login
 
 
 # Create your views here.
@@ -23,14 +23,7 @@ class CJsonEncode(json.JSONEncoder):
         else:
             return json.JSONEncoder.default(self,obj)
 
-#检查是否登陆 如没有则进到login界面
-def check_login(func):
-    def wrap(request):
-        if request.session.get('is_login'):
-            return func(request)
-        else:
-            return redirect('/login/',context_instance=RequestContext(request))
-    return wrap
+
 
 
 #初始化

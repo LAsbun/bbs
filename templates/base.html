@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>bbs</title>
     <link rel="stylesheet" type="text/css" href="/static/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-theme.min.css"/>
     {% block css %} {% endblock %}
 </head>
 <body>
@@ -14,7 +16,7 @@
             <a href="/index/" class="tb active">全部</a>
             <a href="/index/" class="tb">老男孩</a>
             <a href="/index/" class="tb">1024</a>
-            <a href="/index/" class="tb">IT</a>
+            <a href="{% url 'chat' %}" class="tb">IT</a>
         </div>
         <div class="action-nav">
             <a href="{{ login_url }}" class="login-btn-a">{{ login_text }}</a>
@@ -28,7 +30,9 @@
 
 <div class="pg-body">
     <div class="main-content">
+        {% block content %} {% endblock%}
         <div class="content-L">
+            <!--并没有什么用
             <div class="nav-top-area">
                 <div class="child-nav">
                     <a href="/all/hot/recent/1" hidefocus="false" class="hotbtn active icons" id="hotts-nav-btn">最热</a>
@@ -37,6 +41,7 @@
 
                 </div>
             </div>
+            -->
             {% block L-content %} {% endblock %}
         </div>
         <div class="content-R">
@@ -56,6 +61,8 @@
 
 <script type="text/javascript" src="/static/js/jquery-1.12.0.js"></script>
 <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+
 {% block js %} {% endblock %}
 </body>
 </html>

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block L-content %}
     <form action="/login/" method="POST">
         {% csrf_token %}
         <p>用户名:<input type="text" name="username"/></p>

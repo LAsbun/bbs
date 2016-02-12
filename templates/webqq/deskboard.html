@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div >
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li><a href="#contact-box" data-toggle="tab">联系人</a></li>
+            <li><a href="#contact-box-group" data-toggle="tab">群组</a></li>
+            <li><a href="#contact-box-config" data-toggle="tab">配置</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="contact-box">
+                <div class="row chat-box">
+                    <div class="contact-list col-md-3">
+                        <div class="contact-list-head">
+                            <input type="text" class=" contact-list-head"/>
+                        </div>
+                        <div id="contact-list" class="list-group contact-list-content">
+                            {% for friend in friends_list %}
+                                <a href="#" contact-id="{{ friend.friends__id }}" contact-type="single" class="list-group-item">
+                                    {{ friend.friends__username }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="dialog-box col-md-9">
+                        <div class="dialog-box-head">
+                        </div>
+                        <div class="dialog-box-content">
+
+                        </div>
+                        <div class="dialog-box-utils">
+                            s
+                        </div>
+                        <div class="dialog-box-sendmsg ">
+                            <textarea></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="tab-pane" id="contact-box-group">群组</div>
+            <div class="tab-pane" id="contact-box-config">配置</div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function(){
+            $('#contact-list a').click(function(){
+                $(this).addClass('active');
+                $(this).siblings().removeClass('active');
+
+
+                CheckBox(this);
+            });
+
+        });//end of ready
+
+        function CheckBox(doc){
+            var contact_id = $(doc).attr('contact-id');
+            var contact_type = $(doc).attr('contact-type');
+            var contact_content = $(doc).text();
+
+            var dialog_html = "<span contact-id="+contact_id+" contact-type="+contact_type+">"+contact_content+"</span>"
+            $(".dialog-box-head").html(dialog_html);
+            console.log(dialog_html);
+        }
+
+
+
+
+        /*
+         *sendmsg
+         */
+
+        $('body').delegate('textarea', 'keydown', function(e){
+            if(e.which == 13){ //enter keydown
+                textarea = $('textarea');
+                var msg_txt = textarea.val();
+
+                Sendmsg(msg_txt);
+                if($.trim(msg_txt).length > 0) {
+                    Appendcontent(msg_txt);
+                    textarea.val('');
+                }
+            }
+        });
+
+        /*
+         append chat-content to dialog-box-content
+         */
+        function Appendcontent(msg_txt){
+            var send_html = "<div class='put-right'>"+
+                    "<span>"+"{{ username }}"+"</span>"+
+                    "<span>   "+new Date().toLocaleTimeString()+"</span>"+
+                    "<p>"+msg_txt+"</p>"+"</div>";
+
+            var dialog = $(".dialog-box-content");
+            dialog.append(send_html);
+
+
+
+            dialog.animate({
+                scrollTop: dialog[0].scrollHeight},0);
+        }
+        /*
+         sendmsg
+         */
+
+        function Sendmsg(msg_txt){
+            var temp = $('.dialog-box-head span');
+            //console.log(temp);
+            /*var dict = {
+
+                    from_id: {{ user__id }},
+                    to_id:temp.attr('contact-id'),
+                    contact_type:temp.attr('contact-type'),
+                    msg:msg_txt,
+                };*/
+            $.ajax({
+                url:"{% url 'send_msg' %}",
+                data:{
+                    csrfmiddlewaretoken: $.cookie('csrftoken'),
+                    from_id: {{ user__id }},
+                    to_id:temp.attr('contact-id'),
+                    contact_type:temp.attr('contact-type'),
+                    msg:msg_txt,
+                },
+                //data:{data:JSON.stringify(dict), csrfmiddlewaretoken: $.cookie('csrftoken'),},
+                type:'POST',
+                success:function(callback){
+                    console.log(callback);
+                }
+            });
+        }
+    </script>
+{% endblock %}

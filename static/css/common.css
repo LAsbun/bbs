@@ -263,16 +263,69 @@ a {
 }
 
 .content-R {
-    width: 300px;
+    width: 270px;
     padding-top: 4px;
     float: right;
 }
 
 .chat-area {
+    width: 100%;
     border: 1px solid gray;
     height: 475px;
-    position: relative;
+    overflow: auto;
 }
 .chat-height2 {
     height: 45px;
+}
+.chat-box{
+    height: 550px;
+    border: 1px solid black;
+}
+
+.contact-list{
+    height: 100%;
+    border: 1px solid black;
+}
+
+.dialog-box{
+    height: 100%;
+    border: 1px solid black;
+}
+.contact-list-head{
+    width: 100%;
+    margin-top: 12px;
+}
+.contact-list-content{
+    margin-top: 12px;
+}
+.dialog-box-head{
+    height: 10%;
+    border: 1px solid gray;
+    background-color: lightblue;
+}
+.dialog-box-content{
+    height: 70%;
+    border: 1px solid gray;
+    overflow: auto;
+    //background-color: lightblue;
+}
+.dialog-box-utils{
+    height: 5%;
+    border: 1px solid gray;
+    background-color: lightblue;
+}
+.dialog-box-sendmsg{
+    height: 15%;
+    border: 1px solid gray;
+    //background-color: lightblue;
+}
+.dialog-box-sendmsg textarea{
+    height: 100%;
+    width: 100%;
+    resize: none;
+    //border: 1px solid gray;
+    //background-color: lightblue;
+}
+.put-right {
+    margin-left: 80%;
 }
